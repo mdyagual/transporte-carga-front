@@ -1,6 +1,5 @@
 import React from 'react'
-import { Grid, GridColumn } from 'semantic-ui-react'
-import ImageTransport from '../components/Inicio/Image';
+import { Grid } from 'semantic-ui-react'
 import Loggin from '../components/Inicio/Loggin';
 import Service from '../components/Inicio/Service';
 

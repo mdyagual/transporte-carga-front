@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Header, Icon, Input, Label, Segment } from 'semantic-ui-react';
+import { Button, Header, Icon, Input,Segment } from 'semantic-ui-react';
 
 const Loggin = () => {
     return (

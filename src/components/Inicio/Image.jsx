@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Icon, Image, Segment } from 'semantic-ui-react';
+import { Image, Segment } from 'semantic-ui-react';
 import transportImage from '../../assets/transportImage.png' ;
 
 const ImageTransport = () => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dropdown, Grid, Header, Icon, Input, Segment, TextArea } from 'semantic-ui-react';
+import { Dropdown, Grid, Header, Icon, Segment, TextArea } from 'semantic-ui-react';
 import HeaderDinamic from '../../layouts/Header';
 
 const options = [
