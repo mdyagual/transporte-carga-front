@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { auth } from "../../firebase/firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { Button, Header, Icon, Input, Segment } from "semantic-ui-react";
 
 const Loggin = () => {
@@ -9,6 +9,8 @@ const Loggin = () => {
     email: "",
     password: "",
   });
+
+  const [logeado, setLogeado] = useState();
 
   const [errorc, setError] = useState();
   const [errorp, setErrorp] = useState();
@@ -24,12 +26,11 @@ const Loggin = () => {
     e.preventDefault();
     setError("");
     setErrorp("");
-    const userCredential = await signInWithEmailAndPassword(
+    const userLogeado = await signInWithEmailAndPassword(
       auth,
       user.email,
       user.password
     ).catch((err) => {
-      console.log(err);
       switch (err.code) {
         case "auth/invalid-email":
           setError("Correo no valido");
@@ -49,14 +50,18 @@ const Loggin = () => {
         default:
       }
     });
-    console.log(userCredential);
+    setLogeado(userLogeado);
   };
+  useEffect(() => {
+    console.log(logeado);
+  }, []);
+  const sesionLogout = () => signOut(auth);
   const hidenError = () => {
     setError("");
     setErrorp("");
   };
   const styles = { color: "red" };
-
+  console.log(logeado);
   return (
     <>
       <Segment basic>
@@ -92,9 +97,18 @@ const Loggin = () => {
         </span>
       </Segment>
       <Segment basic>
-        <Button primary id="Text" onClick={handleSubmit}>
+        {logeado === "undefined" ? (
+          <Button primary id="Text" onClick={sesionLogout}>
+            Cerrar sesión
+          </Button>
+        ) : (
+          <Button primary id="Text" onClick={handleSubmit}>
+            Iniciar sesión
+          </Button>
+        )}
+        {/* <Button primary id="Text" onClick={handleSubmit}>
           Iniciar sesión
-        </Button>
+        </Button> */}
       </Segment>
       <Segment basic>
         <Header as="h5">
