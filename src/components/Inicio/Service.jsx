@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button, Grid, Header, Segment } from 'semantic-ui-react';
 import ImageTransport from './Image';
 
@@ -17,7 +18,7 @@ const Service = () => {
           <Header as='h3' id="Text">¿Necesitas transportar mercancía de un punto A a un punto B?</Header>
         </Segment>
         <Segment basic>
-          <Button primary id="Text">Solicitar servicio</Button>
+          <Button primary ><Link to={"/consulta"} id="LinkButton"  >Solicitar servicio</Link></Button>
         </Segment>
     </Grid.Column>
   </Grid>

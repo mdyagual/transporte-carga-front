@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button, Header, Icon, Input, Label, Segment } from 'semantic-ui-react';
 
 const Loggin = () => {
@@ -18,7 +19,7 @@ const Loggin = () => {
             <Button primary id="Text">Iniciar sesión</Button>
         </Segment>
         <Segment basic>
-            <Header as='h5' id="HiperText">No tengo una cuenta</Header>
+            <Header as='h5' > <Link to={"/registro"}  id="HiperText">No tengo una cuenta</Link></Header>
         </Segment>
         
         
