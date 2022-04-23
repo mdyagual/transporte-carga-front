@@ -4,11 +4,11 @@ import ConsultaPage from './pages/ConsultaPage';
 //import PokeHeader from './components/PokeHeader';
 import InicioPage from './pages/InicioPage';
 import RegistroPage from './pages/RegistroPage';
-
+import { AuthProvider } from './context/authContext';
 
 const App = () => {
   return (
-    <>
+    <AuthProvider>
     <Router basename={"/"}>
       <Routes >
         <Route path="/" element={<div className='Inicio'><InicioPage/></div>}/>
@@ -17,7 +17,7 @@ const App = () => {
       </Routes>
     </Router>
     
-    </>
+    </AuthProvider>
     
     
   )
