@@ -10,8 +10,9 @@ const Loggin = () => {
     password: "",
   });
 
-  const [logeado, setLogeado] = useState();
   const history = useNavigate();
+  const [logeado, setLogeado] = useState();
+
   const [errorc, setError] = useState();
   const [errorp, setErrorp] = useState();
 
@@ -99,7 +100,7 @@ const Loggin = () => {
       </Segment>
       <Segment basic>
         {logeado ? (
-          <Button primary id="Text" onClick={sesionLogout}>
+          <Button primary id="Text" onClick={() => signOut(auth)}>
             Cerrar sesión
           </Button>
         ) : (
