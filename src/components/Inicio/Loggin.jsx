@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../firebase/firebase";
 import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { Button, Header, Icon, Input, Segment } from "semantic-ui-react";
@@ -11,7 +11,7 @@ const Loggin = () => {
   });
 
   const [logeado, setLogeado] = useState();
-
+  const history = useNavigate();
   const [errorc, setError] = useState();
   const [errorp, setErrorp] = useState();
 
@@ -50,18 +50,19 @@ const Loggin = () => {
         default:
       }
     });
-    setLogeado(userLogeado);
+    if (userLogeado) {
+      setLogeado(userLogeado);
+      history("/consulta");
+    }
   };
-  useEffect(() => {
-    console.log(logeado);
-  }, []);
-  const sesionLogout = () => signOut(auth);
+  const sesionLogout = () => {
+    signOut(auth);
+  };
   const hidenError = () => {
     setError("");
     setErrorp("");
   };
   const styles = { color: "red" };
-  console.log(logeado);
   return (
     <>
       <Segment basic>
@@ -97,7 +98,7 @@ const Loggin = () => {
         </span>
       </Segment>
       <Segment basic>
-        {logeado === "undefined" ? (
+        {logeado ? (
           <Button primary id="Text" onClick={sesionLogout}>
             Cerrar sesión
           </Button>
