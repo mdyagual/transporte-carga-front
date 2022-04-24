@@ -1,6 +1,6 @@
 
 const postPersona = (cliente) => {
-    fetch(`http://localhost:8080/cliente/`,{
+    fetch(`http://localhost:8080/cliente`,{
         method:'POST',
         mode: 'cors',
         credentials: 'same-origin', 
@@ -21,3 +21,5 @@ const postPersona = (cliente) => {
     }).then(data => data).catch(error=>window.alert("Error Post "+error))
     .then(window.alert("La persona se guardo con exito")); 
 }
+
+export default postPersona;

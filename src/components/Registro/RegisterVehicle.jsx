@@ -2,6 +2,9 @@ import React from "react";
 import { Dropdown, Grid, Header, Icon, Input } from "semantic-ui-react";
 
 const RegisterVehicle = ({ handleChangeV, options, handleDrown }) => {
+  const controlPress = (e) => {
+    console.log(e.target.value);
+  };
   return (
     <>
       {" "}
@@ -11,11 +14,33 @@ const RegisterVehicle = ({ handleChangeV, options, handleDrown }) => {
           Datos del vehículo
         </Header>
         <Input
-          placeholder="Placa"
+          placeholder="Placa Letra"
           type="text"
-          name="placa"
-          id="placa"
+          name="placal"
+          maxLength="3"
+          id="placal"
           onChange={handleChangeV}
+          onKeyPress={(event) => {
+            if (!/[A-Z]/.test(event.key)) {
+              window.alert("Solo letras mayusculas");
+              event.preventDefault();
+            }
+          }}
+          style={{ width: "91px" }}
+        />
+        <Input
+          placeholder="Numeros"
+          type="text"
+          name="placan"
+          maxLength="3"
+          id="placan"
+          onChange={handleChangeV}
+          style={{ width: "90px" }}
+          onKeyPress={(event) => {
+            if (!/[0-9]/.test(event.key)) {
+              event.preventDefault();
+            }
+          }}
         />
         <br />
         <Input
@@ -32,6 +57,12 @@ const RegisterVehicle = ({ handleChangeV, options, handleDrown }) => {
           name="modelo"
           id="modelo"
           onChange={handleChangeV}
+          maxLength="4"
+          onKeyPress={(event) => {
+            if (!/[0-9]/.test(event.key)) {
+              event.preventDefault();
+            }
+          }}
         />
         <br />
         <Input
@@ -40,6 +71,12 @@ const RegisterVehicle = ({ handleChangeV, options, handleDrown }) => {
           name="capacidad"
           id="capacidad"
           onChange={handleChangeV}
+          maxLength="5"
+          onKeyPress={(event) => {
+            if (!/[0-9]/.test(event.key)) {
+              event.preventDefault();
+            }
+          }}
         />
         <br />
       </Grid.Column>

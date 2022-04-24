@@ -1,6 +1,7 @@
 import React from "react";
 import { Grid, Header, Icon, Input } from "semantic-ui-react";
-const RegisterCliente = (handleChange, styles, error) => {
+
+const RegisterCliente = ({ handleChange, styles, error, hidenError }) => {
   return (
     <>
       <Grid.Column>
@@ -14,6 +15,7 @@ const RegisterCliente = (handleChange, styles, error) => {
           name="nombre"
           id="nombre"
           onChange={handleChange}
+          onClick={hidenError}
         />
         <br />
         <Input
@@ -27,6 +29,7 @@ const RegisterCliente = (handleChange, styles, error) => {
             }
           }}
           onChange={handleChange}
+          onClick={hidenError}
         />
         <br />
         <Input
@@ -41,6 +44,7 @@ const RegisterCliente = (handleChange, styles, error) => {
             }
           }}
           onChange={handleChange}
+          onClick={hidenError}
         />
         <br />
         <Input
@@ -48,13 +52,14 @@ const RegisterCliente = (handleChange, styles, error) => {
           type="text"
           name="celular"
           id="celular"
+          onChange={handleChange}
           maxLength="10"
           onKeyPress={(event) => {
             if (!/[0-9]/.test(event.key)) {
               event.preventDefault();
             }
           }}
-          onChange={handleChange}
+          onClick={hidenError}
         />
         <br />
       </Grid.Column>
@@ -65,24 +70,28 @@ const RegisterCliente = (handleChange, styles, error) => {
         <Input
           placeholder="Correo electrónico"
           type="email"
-          name="email"
-          id="email"
+          name="correo"
+          id="correo"
           onChange={handleChange}
+          onClick={hidenError}
         />
         <br />
         <Input
           placeholder="Contraseña"
           type="password"
-          name="password"
-          id="password"
+          name="contraseña"
+          id="contraseña"
           onChange={handleChange}
+          onClick={hidenError}
         />
         <br />
         <Input
           placeholder="Confirmar contraseña"
           type="password"
-          name="confirmpassword"
-          id="confirmpassword"
+          name="confirmcontraseña"
+          id="confirmcontraseña"
+          onChange={handleChange}
+          onClick={hidenError}
         />
         <br />
         <span className="error" style={styles}>

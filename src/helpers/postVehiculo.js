@@ -1,6 +1,7 @@
 
 const postVehiculo = (vehiculo) => {
-    fetch(`http://localhost:8080/vehiculo/`,{
+    console.log(vehiculo)
+    fetch(`http://localhost:8080/vehiculo`,{
         method:'POST',
         mode: 'cors',
         credentials: 'same-origin', 
@@ -9,15 +10,18 @@ const postVehiculo = (vehiculo) => {
             'Content-Type':'application/json'
         },
         body:JSON.stringify({
-            idCliente : cliente.id,
-            modelo : cliente.edad,
-            capacidad : cliente.celular,
-            placa:cliente.nombre,
-            marca:cliente.correo,
-            tipo : cliente.contraseña,
+            idCliente : vehiculo.idCliente,
+            modelo : vehiculo.modelo,
+            capacidad : vehiculo.capacidad,
+            placa : vehiculo.placal+vehiculo.placan,
+            marca : vehiculo.marca,
+            tipo : vehiculo.tipo,
         })
         
 
-    }).then(data => data).catch(error=>window.alert("Error Post "+error))
-    .then(window.alert("El vehiculo se guardo con exito")); 
+    }).then(data => data).then(window.alert("El vehiculo se guardo con exito"))
+    .catch(error=>window.alert("Error Post "+error));
+    
 }
+
+export default postVehiculo;
