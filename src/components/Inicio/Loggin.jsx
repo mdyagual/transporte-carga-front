@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../firebase/firebase";
 import { signInWithEmailAndPassword, signOut } from "firebase/auth";
@@ -55,9 +55,6 @@ const Loggin = () => {
       setLogeado(userLogeado);
       history("/consulta");
     }
-  };
-  const sesionLogout = () => {
-    signOut(auth);
   };
   const hidenError = () => {
     setError("");
