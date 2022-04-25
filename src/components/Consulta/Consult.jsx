@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {
   Dropdown,
   Grid,
@@ -7,19 +7,21 @@ import {
   Segment,
   TextArea,
   Button,
+  Select,
 } from "semantic-ui-react";
 import HeaderDinamic from "../../layouts/Header";
 import { auth } from "../../firebase/firebase";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
-const options = [
-  { key: 1, text: "Choice 1", value: 1 },
-  { key: 2, text: "Choice 2", value: 2 },
-  { key: 3, text: "Choice 3", value: 3 },
-];
-
-const Consult = () => {
+const Consult = ({vehiculos}) => {
+  const [selectModel, setSelectModel] = useState();
+  const ddHandler = (e) => {
+    vehiculos.map((o) => o.text==e.target.outerText
+                      ? setSelectModel(o.value)
+                      : ""); 
+    
+  }
   const history = useNavigate();
   return (
     <>
@@ -46,7 +48,7 @@ const Consult = () => {
             </Segment>
             <Segment basic>
               {" "}
-              <Dropdown text="Selecione..." options={options} item button />
+              <Dropdown selection options={vehiculos} placeholder="Selecione..."  onChange={ddHandler} />
             </Segment>
           </Grid.Column>
           <Grid.Column>
@@ -56,7 +58,7 @@ const Consult = () => {
               </Header>
             </Segment>
             <Segment basic>
-              <TextArea></TextArea>
+              <Segment secondary ><pre>{selectModel}</pre></Segment>
             </Segment>
           </Grid.Column>
         </Grid.Row>

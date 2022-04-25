@@ -10,7 +10,9 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase/firebase";
 
 
+
 const App = () => {
+  
   const [user, setUser] = useState(null)
   onAuthStateChanged(auth,(usuarioFirebase)=>{
     if(usuarioFirebase){
@@ -19,14 +21,17 @@ const App = () => {
       setUser(null)
     }
   });
-  console.log(user)
+  //console.log(user)
+  
+  
+
   return (
     <AuthProvider>
     <Router basename={"/"}>
       <Routes >
         <Route path="/" element={<div className='Inicio'><InicioPage/></div>}/>
         <Route path="/registro" element={<div className='Registro'><RegistroPage/></div>}/>
-        <Route path="/consulta" element={<div className='Consulta'><ConsultaPage/></div>}/>
+        <Route path="/consulta" element={<div className='Consulta'><ConsultaPage /></div>}/>
       </Routes>
     </Router>
     
