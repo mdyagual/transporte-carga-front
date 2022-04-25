@@ -19,7 +19,7 @@ const postVehiculo = (vehiculo) => {
         })
         
 
-    }).then(data => data).then(window.alert("El vehiculo se guardo con exito"))
+    }).then(data => data)
     .catch(error=>window.alert("Error Post "+error));
     
 }

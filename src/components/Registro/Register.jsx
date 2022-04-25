@@ -35,6 +35,9 @@ const Register = () => {
     confirmcontraseña: "",
   });
   const handleChange = ({ target: { name, value } }) => {
+    if (name === "id") {
+      setVehiculo({ ...vehiculo, idCliente: value });
+    }
     setCliente({
       ...cliente,
       [name]: value,
@@ -54,10 +57,21 @@ const Register = () => {
     });
   };
   const onRegister = () => {
-    if (cliente.contraseña !== cliente.confirmcontraseña) {
+    if (cliente.nombre === "") {
+      setError("Ingrese nombre completo");
+    } else if (cliente.id === "") {
+      setError("Ingrese su ID");
+    } else if (cliente.edad === "" || cliente.edad < 18 || cliente.edad > 66) {
+      setError("Ingrese una edad correcta >17 <66");
+    } else if (cliente.contraseña !== cliente.confirmcontraseña) {
       setError("Confirmar contraseña correcta");
+    } else if (vehiculo.tipo === "") {
+      setError("Seleccione tipo de vehiculo");
+    } else if (vehiculo.tipo === "") {
+      setError("Seleccione tipo de vehiculo");
     } else {
       postCliente(cliente);
+      postVehiculo(vehiculo);
     }
   };
   useEffect(() => {

@@ -19,7 +19,7 @@ const postPersona = (cliente) => {
         
 
     }).then(data => data).catch(error=>window.alert("Error Post "+error))
-    .then(window.alert("La persona se guardo con exito")); 
+    .then(window.alert("Registro exitoso")); 
 }
 
 export default postPersona;

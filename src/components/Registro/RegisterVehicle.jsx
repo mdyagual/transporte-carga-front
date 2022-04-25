@@ -1,10 +1,12 @@
 import React from "react";
 import { Dropdown, Grid, Header, Icon, Input } from "semantic-ui-react";
 
-const RegisterVehicle = ({ handleChangeV, options, handleDrown }) => {
-  const controlPress = (e) => {
-    console.log(e.target.value);
-  };
+const RegisterVehicle = ({
+  handleChangeV,
+  options,
+  handleDrown,
+  hidenError,
+}) => {
   return (
     <>
       {" "}
@@ -20,6 +22,7 @@ const RegisterVehicle = ({ handleChangeV, options, handleDrown }) => {
           maxLength="3"
           id="placal"
           onChange={handleChangeV}
+          onClick={hidenError}
           onKeyPress={(event) => {
             if (!/[A-Z]/.test(event.key)) {
               window.alert("Solo letras mayusculas");
@@ -34,6 +37,7 @@ const RegisterVehicle = ({ handleChangeV, options, handleDrown }) => {
           name="placan"
           maxLength="3"
           id="placan"
+          onClick={hidenError}
           onChange={handleChangeV}
           style={{ width: "90px" }}
           onKeyPress={(event) => {
@@ -49,6 +53,7 @@ const RegisterVehicle = ({ handleChangeV, options, handleDrown }) => {
           name="marca"
           id="marca"
           onChange={handleChangeV}
+          onClick={hidenError}
         />
         <br />
         <Input
@@ -56,6 +61,7 @@ const RegisterVehicle = ({ handleChangeV, options, handleDrown }) => {
           type="text"
           name="modelo"
           id="modelo"
+          onClick={hidenError}
           onChange={handleChangeV}
           maxLength="4"
           onKeyPress={(event) => {
@@ -94,6 +100,7 @@ const RegisterVehicle = ({ handleChangeV, options, handleDrown }) => {
             selection
             placeholder="Tipo de Vehiculo"
             onChange={handleDrown}
+            onClick={hidenError}
           />
         </div>
       </Grid.Column>
