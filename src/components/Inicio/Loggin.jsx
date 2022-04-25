@@ -24,36 +24,46 @@ const Loggin = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
-    setErrorp("");
-    const userLogeado = await signInWithEmailAndPassword(
-      auth,
-      user.email,
-      user.password
-    ).catch((err) => {
-      switch (err.code) {
-        case "auth/invalid-email":
-          setError("Correo no valido");
-          break;
-        case "auth/user-disabled":
-          setError("Usuario no habilitado");
-          break;
-        case "auth/user-not-found":
-          setError("Usuario no funciona");
-          break;
-        case "auth/wrong-password":
-          setErrorp("Password equivocado");
-          break;
-        case "auth/too-many-requests":
-          setErrorp("Cuenta temporalmente inactiva");
-          break;
-        default:
+    if (user.email === "") {
+      setError("El correo no puede ser vacio");
+    } else if (user.password === "") {
+      setErrorp("La contraseña no puede ser vacia");
+    } else {
+      e.preventDefault();
+      setError("");
+      setErrorp("");
+      const userLogeado = await signInWithEmailAndPassword(
+        auth,
+        user.email,
+        user.password
+      )
+        .then((usuarioFirebase) => {
+          return usuarioFirebase;
+        })
+        .catch((err) => {
+          switch (err.code) {
+            case "auth/invalid-email":
+              setError("Correo no valido");
+              break;
+            case "auth/user-disabled":
+              setError("Usuario no habilitado");
+              break;
+            case "auth/user-not-found":
+              setError("Usuario no funciona");
+              break;
+            case "auth/wrong-password":
+              setErrorp("Password equivocado");
+              break;
+            case "auth/too-many-requests":
+              setErrorp("Cuenta temporalmente inactiva");
+              break;
+            default:
+          }
+        });
+      if (userLogeado) {
+        setLogeado(userLogeado);
+        history("/perfil");
       }
-    });
-    if (userLogeado) {
-      setLogeado(userLogeado);
-      history("/consulta");
     }
   };
   const hidenError = () => {

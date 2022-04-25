@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, Grid, Segment } from "semantic-ui-react";
 import HeaderDinamic from "../../layouts/Header";
-import { useAuth } from "../../context/authContext";
 import RegisterVehicle from "./RegisterVehicle";
 import RegisterCliente from "./RegisterCliente";
 import postVehiculo from "../../helpers/postVehiculo";
