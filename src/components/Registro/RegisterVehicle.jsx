@@ -76,6 +76,7 @@ const RegisterVehicle = ({
           type="text"
           name="capacidad"
           id="capacidad"
+          onClick={hidenError}
           onChange={handleChangeV}
           maxLength="5"
           onKeyPress={(event) => {

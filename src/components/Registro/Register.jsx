@@ -57,16 +57,41 @@ const Register = () => {
     });
   };
   const onRegister = () => {
+    var caract = new RegExp(
+      /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/
+    );
+    var fecha = new Date();
+    var anio = fecha.getFullYear();
     if (cliente.nombre === "") {
       setError("Ingrese nombre completo");
     } else if (cliente.id === "") {
       setError("Ingrese su ID");
     } else if (cliente.edad === "" || cliente.edad < 18 || cliente.edad > 66) {
       setError("Ingrese una edad correcta >17 <66");
+    } else if (cliente.celular === "") {
+      setError("Ingrese un numero de contacto");
+    } else if (cliente.correo === "" || caract.test(cliente.correo) === false) {
+      setError("Ingrese un correo correcto");
     } else if (cliente.contraseña !== cliente.confirmcontraseña) {
       setError("Confirmar contraseña correcta");
-    } else if (vehiculo.tipo === "") {
-      setError("Seleccione tipo de vehiculo");
+    } else if (vehiculo.placal === "" || vehiculo.placal.length < 3) {
+      setError("Ingrese Letras de placa correctas");
+    } else if (vehiculo.placan === "" || vehiculo.placan.length < 3) {
+      setError("Ingrese numero de placa correcto");
+    } else if (vehiculo.marca === "") {
+      setError("Ingrese marca del vehiculo");
+    } else if (
+      vehiculo.modelo === "" ||
+      vehiculo.modelo < 1980 ||
+      vehiculo.modelo > anio + 1
+    ) {
+      setError("Ingrese modelo correcto de vehiculo");
+    } else if (
+      vehiculo.capacidad === "" ||
+      vehiculo.capacidad < 1 ||
+      vehiculo.capacidad > 99999
+    ) {
+      setError("Ingrese una capacidad correcta");
     } else if (vehiculo.tipo === "") {
       setError("Seleccione tipo de vehiculo");
     } else {

@@ -37,6 +37,7 @@ const RegisterCliente = ({ handleChange, styles, error, hidenError }) => {
           type="text"
           name="edad"
           id="edad"
+          minLength="2"
           maxLength="2"
           onKeyPress={(event) => {
             if (!/[0-9]/.test(event.key)) {
