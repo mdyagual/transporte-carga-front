@@ -5,39 +5,17 @@ import {
   Header,
   Icon,
   Segment,
-  TextArea,
-  Button,
-  Select,
 } from "semantic-ui-react";
 import HeaderDinamic from "../../layouts/Header";
-import { auth } from "../../firebase/firebase";
-import { signOut } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+
 
 const Consult = ({vehiculos}) => {
-  const [selectModel, setSelectModel] = useState();
-  const ddHandler = (e) => {
-    vehiculos.map((o) => o.text==e.target.outerText
-                      ? setSelectModel(o.value)
-                      : ""); 
-    
-  }
-  const history = useNavigate();
+  const [selectModel, setSelectModel] = useState('');
   return (
     <>
       <Grid stackable container divided="vertically">
         <Segment basic>
           <HeaderDinamic title={"Consulta"} />
-          <Button
-            primary
-            id="Text"
-            onClick={() => {
-              signOut(auth);
-              history("/");
-            }}
-          >
-            Cerrar sesión
-          </Button>
         </Segment>
         <Grid.Row centered columns={2}>
           <Grid.Column>
@@ -48,7 +26,8 @@ const Consult = ({vehiculos}) => {
             </Segment>
             <Segment basic>
               {" "}
-              <Dropdown selection options={vehiculos} placeholder="Selecione..."  onChange={ddHandler} />
+              <Dropdown selection options={vehiculos} placeholder="Selecione..."  onChange={(e,data) =>  setSelectModel(data.value)} value={selectModel}/>
+              
             </Segment>
           </Grid.Column>
           <Grid.Column>

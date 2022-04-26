@@ -13,13 +13,11 @@ export const ConsultReducer = (state = initialState, action) => {
             action.payload.map((v) =>  newV.push({
                 key: v.placa,
                 text: v.marca,
-                value: `Nombre: ${"ABCDEF"}\nPlaca: ${v.placa}\nCapacidad: ${v.capacidad}\nCelular: ${"NNNNNNNN"}`,
+                value: `Nombre: ${v.conductor.nombre}\nPlaca: ${v.placa}\nCapacidad: ${v.capacidad}\nTipo: ${v.tipo}\nCelular: ${v.conductor.celular}`,
                 
                 }));
+            console.log(newV);
             return {...state, vehiculos:newV};
-
-        /*case actConsult.GET_INFO_VEHICLE:
-            const selVeh = state.selected[action.payload];*/
         default:
             return {...state};
 
