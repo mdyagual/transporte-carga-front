@@ -82,6 +82,7 @@ const RegisterCliente = ({ handleChange, styles, error, hidenError }) => {
           type="password"
           name="contraseña"
           id="contraseña"
+          pattern="(?=.*\d)(?=.*[a-záéíóúüñ]).*[A-ZÁÉÍÓÚÜÑ].*"
           onChange={handleChange}
           onClick={hidenError}
         />
@@ -91,6 +92,7 @@ const RegisterCliente = ({ handleChange, styles, error, hidenError }) => {
           type="password"
           name="confirmcontraseña"
           id="confirmcontraseña"
+          pattern="(?=.*\d)(?=.*[a-záéíóúüñ]).*[A-ZÁÉÍÓÚÜÑ].*"
           onChange={handleChange}
           onClick={hidenError}
         />

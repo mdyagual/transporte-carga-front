@@ -72,7 +72,7 @@ const RegisterVehicle = ({
         />
         <br />
         <Input
-          placeholder="Capacidad"
+          placeholder="Capacidad KGs"
           type="text"
           name="capacidad"
           id="capacidad"

@@ -5,6 +5,9 @@ import RegisterVehicle from "./RegisterVehicle";
 import RegisterCliente from "./RegisterCliente";
 import postVehiculo from "../../helpers/postVehiculo";
 import postCliente from "../../helpers/postCliente";
+import { auth } from "../../firebase/firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 const options = [
   { key: 1, text: "pick up", value: "pick up" },
@@ -13,10 +16,11 @@ const options = [
 ];
 
 const Register = () => {
+  const history = useNavigate();
   const [error, setError] = useState();
   const [errorp, setErrorp] = useState();
   const [vehiculo, setVehiculo] = useState({
-    idCliente: 0,
+    email: "",
     modelo: 0,
     capacidad: 0,
     placal: "",
@@ -34,8 +38,8 @@ const Register = () => {
     confirmcontraseña: "",
   });
   const handleChange = ({ target: { name, value } }) => {
-    if (name === "id") {
-      setVehiculo({ ...vehiculo, idCliente: value });
+    if (name === "correo") {
+      setVehiculo({ ...vehiculo, email: value });
     }
     setCliente({
       ...cliente,
@@ -59,6 +63,7 @@ const Register = () => {
     var caract = new RegExp(
       /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/
     );
+    var pass = /^(?=.*\d)(?=.*[a-záéíóúüñ]).*[A-ZÁÉÍÓÚÜÑ]/;
     var fecha = new Date();
     var anio = fecha.getFullYear();
     if (cliente.nombre === "") {
@@ -71,6 +76,14 @@ const Register = () => {
       setError("Ingrese un numero de contacto");
     } else if (cliente.correo === "" || caract.test(cliente.correo) === false) {
       setError("Ingrese un correo correcto");
+    } else if (
+      cliente.contraseña === "" ||
+      !pass.test(cliente.contraseña) ||
+      cliente.contraseña.length < 8
+    ) {
+      setError(
+        "Ingrese contraseña correcta. Al menos una mayuscula y minimo 8 caracteres"
+      );
     } else if (cliente.contraseña !== cliente.confirmcontraseña) {
       setError("Confirmar contraseña correcta");
     } else if (vehiculo.placal === "" || vehiculo.placal.length < 3) {
@@ -94,8 +107,32 @@ const Register = () => {
     } else if (vehiculo.tipo === "") {
       setError("Seleccione tipo de vehiculo");
     } else {
-      postCliente(cliente);
-      postVehiculo(vehiculo);
+      const usuario = createUserWithEmailAndPassword(
+        auth,
+        cliente.correo,
+        cliente.contraseña
+      )
+        .then((usuarioFirebase) => {
+          postCliente(cliente);
+          postVehiculo(vehiculo);
+          history("/perfil");
+          return usuarioFirebase;
+        })
+        .catch((err) => {
+          console.log(err);
+          switch (err.code) {
+            case "auth/internal-error":
+              setError("Error verifique correo");
+              break;
+            case "auth/weak-password":
+              setError("Contraseña debil");
+              break;
+            case "auth/email-already-in-use":
+              setError("Este correo ya está en uso");
+              break;
+            default:
+          }
+        });
     }
   };
   useEffect(() => {

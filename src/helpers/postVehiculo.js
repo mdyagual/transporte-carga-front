@@ -10,7 +10,7 @@ const postVehiculo = (vehiculo) => {
             'Content-Type':'application/json'
         },
         body:JSON.stringify({
-            idCliente : vehiculo.idCliente,
+            email : vehiculo.email,
             modelo : vehiculo.modelo,
             capacidad : vehiculo.capacidad,
             placa : vehiculo.placal+vehiculo.placan,
