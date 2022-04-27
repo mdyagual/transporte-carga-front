@@ -19,32 +19,34 @@ const Register = () => {
   const history = useNavigate();
   const [error, setError] = useState();
   const [errorp, setErrorp] = useState();
+
+  const [conductor, setConductor] = useState({
+    id: 0,
+    nombre: "",
+    edad: 0,
+    celular: 0,
+    correo: "",
+    contraseña: "",
+    confirmcontraseña: "",
+  });
   const [vehiculo, setVehiculo] = useState({
-    email: "",
-    modelo: 0,
+    conductor: conductor,
+    año: 0,
     capacidad: 0,
     placal: "",
     placan: "",
     marca: "",
     tipo: "",
   });
-  const [cliente, setCliente] = useState({
-    id: 0,
-    edad: 0,
-    celular: 0,
-    nombre: "",
-    correo: "",
-    contraseña: "",
-    confirmcontraseña: "",
-  });
   const handleChange = ({ target: { name, value } }) => {
-    if (name === "correo") {
-      setVehiculo({ ...vehiculo, email: value });
-    }
-    setCliente({
-      ...cliente,
+    setConductor({
+      ...conductor,
       [name]: value,
     });
+    console.log(name);
+    if (name === "confirmcontraseña") {
+      setVehiculo({ ...vehiculo, conductor });
+    }
   };
 
   const handleDrown = (e, result) => {
@@ -65,26 +67,33 @@ const Register = () => {
     );
     var pass = /^(?=.*\d)(?=.*[a-záéíóúüñ]).*[A-ZÁÉÍÓÚÜÑ]/;
     var fecha = new Date();
-    var anio = fecha.getFullYear();
-    if (cliente.nombre === "") {
+    var anios = fecha.getFullYear();
+    if (conductor.nombre === "") {
       setError("Ingrese nombre completo");
-    } else if (cliente.id === "") {
+    } else if (conductor.id === "") {
       setError("Ingrese su ID");
-    } else if (cliente.edad === "" || cliente.edad < 18 || cliente.edad > 66) {
+    } else if (
+      conductor.edad === "" ||
+      conductor.edad < 18 ||
+      conductor.edad > 66
+    ) {
       setError("Ingrese una edad correcta >17 <66");
-    } else if (cliente.celular === "") {
+    } else if (conductor.celular === "") {
       setError("Ingrese un numero de contacto");
-    } else if (cliente.correo === "" || caract.test(cliente.correo) === false) {
+    } else if (
+      conductor.correo === "" ||
+      caract.test(conductor.correo) === false
+    ) {
       setError("Ingrese un correo correcto");
     } else if (
-      cliente.contraseña === "" ||
-      !pass.test(cliente.contraseña) ||
-      cliente.contraseña.length < 8
+      conductor.contraseña === "" ||
+      !pass.test(conductor.contraseña) ||
+      conductor.contraseña.length < 8
     ) {
       setError(
-        "Ingrese contraseña correcta. Al menos una mayuscula y minimo 8 caracteres"
+        "Ingrese contraseña correcta. Al menos una mayuscula, una minuscula y minimo 8 caracteres"
       );
-    } else if (cliente.contraseña !== cliente.confirmcontraseña) {
+    } else if (conductor.contraseña !== conductor.confirmcontraseña) {
       setError("Confirmar contraseña correcta");
     } else if (vehiculo.placal === "" || vehiculo.placal.length < 3) {
       setError("Ingrese Letras de placa correctas");
@@ -93,9 +102,9 @@ const Register = () => {
     } else if (vehiculo.marca === "") {
       setError("Ingrese marca del vehiculo");
     } else if (
-      vehiculo.modelo === "" ||
-      vehiculo.modelo < 1980 ||
-      vehiculo.modelo > anio + 1
+      vehiculo.anio === "" ||
+      vehiculo.anio < 1980 ||
+      vehiculo.anio > anios + 1
     ) {
       setError("Ingrese modelo correcto de vehiculo");
     } else if (
@@ -109,17 +118,15 @@ const Register = () => {
     } else {
       const usuario = createUserWithEmailAndPassword(
         auth,
-        cliente.correo,
-        cliente.contraseña
+        conductor.correo,
+        conductor.contraseña
       )
         .then((usuarioFirebase) => {
-          postCliente(cliente);
           postVehiculo(vehiculo);
           history("/perfil");
           return usuarioFirebase;
         })
         .catch((err) => {
-          console.log(err);
           switch (err.code) {
             case "auth/internal-error":
               setError("Error verifique correo");

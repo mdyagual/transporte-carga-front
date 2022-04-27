@@ -1,6 +1,6 @@
 
 const postVehiculo = (vehiculo) => {
-    console.log(vehiculo)
+    console.log(vehiculo.cliente)
     fetch(`http://localhost:8080/vehiculo`,{
         method:'POST',
         mode: 'cors',
@@ -10,12 +10,12 @@ const postVehiculo = (vehiculo) => {
             'Content-Type':'application/json'
         },
         body:JSON.stringify({
-            email : vehiculo.email,
-            modelo : vehiculo.modelo,
-            capacidad : vehiculo.capacidad,
             placa : vehiculo.placal+vehiculo.placan,
             marca : vehiculo.marca,
+            anio : vehiculo.modelo,
+            capacidad : vehiculo.capacidad,
             tipo : vehiculo.tipo,
+            conductor : vehiculo.conductor,
         })
         
 

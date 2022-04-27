@@ -6,34 +6,26 @@ import HeaderDinamic from "../../layouts/Header";
 import { useNavigate } from "react-router-dom";
 
 const ConsultaPerfil = ({ user }) => {
+  console.log("Usuario " + user);
   const history = useNavigate();
-  const [vehiculo, setVehiculo] = useState({
-    id: 0,
-    idCliente: 0,
-    modelo: 0,
-    capacidad: 0,
-    placa: "",
-    marca: "",
-    tipo: "",
-  });
-  const [cliente, setCliente] = useState({
+  const [conductor, setConductor] = useState({
     id: 0,
     edad: 0,
     celular: 0,
     nombre: "",
     correo: "",
   });
-
+  const [vehiculo, setVehiculo] = useState({
+    conductor: { conductor },
+    año: 0,
+    capacidad: 0,
+    placa: "",
+    marca: "",
+    tipo: "",
+  });
   useEffect(async () => {
-    const urlc = "http://localhost:8080/cliente/email/" + user;
-    const cli = await fetch(urlc)
-      .then((resc) => {
-        return resc.json();
-      })
-      .then((datac) => setCliente(datac))
-      .catch((error) => console.log(error));
-
-    const ve = await fetch("http://localhost:8080/vehiculo/cliente/" + user)
+    const url = `http://localhost:8080/vehiculo/cliente/${user}`;
+    const ve = await fetch(url)
       .then((res) => {
         return res.json();
       })
@@ -58,27 +50,27 @@ const ConsultaPerfil = ({ user }) => {
             <Input
               style={{ width: "280px" }}
               name="nombre"
-              value={"Nombre : " + cliente.nombre}
+              value={"Nombre : " + vehiculo.conductor.nombre}
               disabled
             />
             <br />
             <Input
               name="id"
-              value={"ID : " + cliente.id}
+              value={"ID : " + vehiculo.conductor.id}
               style={{ width: "280px" }}
               disabled
             />
             <br />
             <Input
               name="email"
-              value={"Email : " + cliente.correo}
+              value={"Email : " + vehiculo.conductor.correo}
               style={{ width: "280px" }}
               disabled
             />
             <br />
             <Input
               name="edad"
-              value={"Edad : " + cliente.edad}
+              value={"Edad : " + vehiculo.conductor.edad}
               style={{ width: "280px" }}
               disabled
             />
@@ -86,7 +78,7 @@ const ConsultaPerfil = ({ user }) => {
             <Input
               style={{ width: "280px" }}
               name="celular"
-              value={"Contacto : " + cliente.celular}
+              value={"Contacto : " + vehiculo.conductor.celular}
               disabled
             />
             <br />

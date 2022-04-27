@@ -59,8 +59,8 @@ const RegisterVehicle = ({
         <Input
           placeholder="Modelo"
           type="text"
-          name="modelo"
-          id="modelo"
+          name="anio"
+          id="anio"
           onClick={hidenError}
           onChange={handleChangeV}
           maxLength="4"

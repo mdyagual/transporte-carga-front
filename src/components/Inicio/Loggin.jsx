@@ -115,9 +115,6 @@ const Loggin = () => {
             Iniciar sesión
           </Button>
         )}
-        {/* <Button primary id="Text" onClick={handleSubmit}>
-          Iniciar sesión
-        </Button> */}
       </Segment>
       <Segment basic>
         <Header as="h5">
