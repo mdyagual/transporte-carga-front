@@ -134,7 +134,7 @@ const Register = () => {
           const data = transporteCargaAPI.postDriverInfo(request);
           alert("¡Registro exitoso!");
           
-          history("/inicio");
+          history("/");
           return usuarioFirebase;
         })
         .catch((err) => {
