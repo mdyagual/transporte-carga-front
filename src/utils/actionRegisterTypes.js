@@ -1,0 +1,2 @@
+export const POST_DRIVER_INFO="POST_DRIVER_INFO";
+export const GET_DRIVER_INFO="GET_DRIVER_INFO";
