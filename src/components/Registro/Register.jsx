@@ -8,6 +8,8 @@ import postCliente from "../../helpers/postCliente";
 import { auth } from "../../firebase/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import transporteCargaAPI from "../../services/transporteCargaAPI";
 
 const options = [
   { key: 1, text: "pick up", value: "pick up" },
@@ -16,17 +18,21 @@ const options = [
 ];
 
 const Register = () => {
+  
+  const dispatch= useDispatch();
+  const datos = useSelector( (state) => state.register.info);
+
   const history = useNavigate();
   const [error, setError] = useState();
   const [errorp, setErrorp] = useState();
   const [vehiculo, setVehiculo] = useState({
     email: "",
-    modelo: 0,
+    anio: 0,
     capacidad: 0,
     placal: "",
     placan: "",
     marca: "",
-    tipo: "",
+    tipo: ""
   });
   const [cliente, setCliente] = useState({
     id: 0,
@@ -59,6 +65,9 @@ const Register = () => {
       [name]: value,
     });
   };
+
+
+
   const onRegister = () => {
     var caract = new RegExp(
       /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/
@@ -93,9 +102,9 @@ const Register = () => {
     } else if (vehiculo.marca === "") {
       setError("Ingrese marca del vehiculo");
     } else if (
-      vehiculo.modelo === "" ||
-      vehiculo.modelo < 1980 ||
-      vehiculo.modelo > anio + 1
+      //vehiculo.modelo === "" ||
+      vehiculo.anio < 1980 ||
+      vehiculo.anio > anio + 1
     ) {
       setError("Ingrese modelo correcto de vehiculo");
     } else if (
@@ -107,14 +116,33 @@ const Register = () => {
     } else if (vehiculo.tipo === "") {
       setError("Seleccione tipo de vehiculo");
     } else {
+      //------
       const usuario = createUserWithEmailAndPassword(
         auth,
         cliente.correo,
         cliente.contraseña
       )
         .then((usuarioFirebase) => {
-          postCliente(cliente);
-          postVehiculo(vehiculo);
+          const request = {
+            placa: vehiculo.placal+vehiculo.placan,
+            marca: vehiculo.marca,
+            anio: vehiculo.anio,
+            capacidad: vehiculo.capacidad,
+            tipo: vehiculo.tipo,
+            conductor: {
+                id: cliente.id,
+                nombre: cliente.nombre,
+                edad: cliente.edad,
+                celular: cliente.celular,
+                correo: cliente.correo
+            }
+
+          }
+          const data = transporteCargaAPI.postDriverInfo(request)
+          console.log(data);
+          
+          //postCliente(cliente);
+          //postVehiculo(vehiculo);
           history("/perfil");
           return usuarioFirebase;
         })
@@ -133,6 +161,7 @@ const Register = () => {
             default:
           }
         });
+        //--------
     }
   };
   useEffect(() => {

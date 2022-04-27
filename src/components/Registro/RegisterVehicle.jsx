@@ -57,10 +57,10 @@ const RegisterVehicle = ({
         />
         <br />
         <Input
-          placeholder="Modelo"
+          placeholder="Año"
           type="text"
-          name="modelo"
-          id="modelo"
+          name="anio"
+          id="anio"
           onClick={hidenError}
           onChange={handleChangeV}
           maxLength="4"
@@ -88,8 +88,7 @@ const RegisterVehicle = ({
         <br />
       </Grid.Column>
       <Grid.Column>
-        <br />
-        <br />
+        
         <div>
           <Dropdown
             id="tipo"
