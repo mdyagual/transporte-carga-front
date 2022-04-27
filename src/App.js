@@ -21,6 +21,7 @@ const App = () => {
     }
   });
   return (
+
     <AuthProvider>
     <Router basename={"/"}>
       <Routes >
@@ -36,28 +37,5 @@ const App = () => {
     
   )
 }
-
-// import { onAuthStateChanged } from "firebase/auth";
-// import { auth } from './firebase/firebase';
-// import Loggin from './components/Inicio/Loggin';
-// <button onClick={() => signOut(auth)}>Cerrar Sesion</button>
-
-// const App = () => {
-//   const [user, setUser] = useState(null)
-//   onAuthStateChanged(auth,(usuarioFirebase)=>{
-//     if(usuarioFirebase){
-//       setUser(usuarioFirebase)
-//     }else{
-//       setUser(null)
-//     }
-//   });
-//   console.log(user)
-//   return (
-//     // <AuthProvider>
-//     <>
-//       { user ? <ConsultaPage user={user}/>:<Loggin /> }</>
-    
-//   )
-// }
 
 export default App;
