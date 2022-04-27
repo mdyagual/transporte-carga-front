@@ -1,5 +1,5 @@
 import React from "react";
-import { Dropdown, Grid, Header, Icon, Input } from "semantic-ui-react";
+import { Dropdown, Grid, Header, Icon, Input, Segment } from "semantic-ui-react";
 
 const RegisterVehicle = ({
   handleChangeV,
@@ -9,7 +9,6 @@ const RegisterVehicle = ({
 }) => {
   return (
     <>
-      {" "}
       <Grid.Column>
         <Header as="h5" id="Text">
           <Icon name="truck" />
@@ -87,9 +86,8 @@ const RegisterVehicle = ({
         />
         <br />
       </Grid.Column>
-      <Grid.Column>
-        
-        <div>
+      <Grid.Column> <Segment basic>  
+        <Segment basic>
           <Dropdown
             id="tipo"
             name="tipo"
@@ -102,7 +100,8 @@ const RegisterVehicle = ({
             onChange={handleDrown}
             onClick={hidenError}
           />
-        </div>
+        </Segment>
+        </Segment>     
       </Grid.Column>
     </>
   );

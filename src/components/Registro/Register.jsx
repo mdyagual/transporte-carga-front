@@ -3,24 +3,24 @@ import { Button, Grid, Segment } from "semantic-ui-react";
 import HeaderDinamic from "../../layouts/Header";
 import RegisterVehicle from "./RegisterVehicle";
 import RegisterCliente from "./RegisterCliente";
-import postVehiculo from "../../helpers/postVehiculo";
-import postCliente from "../../helpers/postCliente";
+//import postVehiculo from "../../helpers/postVehiculo";
+//import postCliente from "../../helpers/postCliente";
 import { auth } from "../../firebase/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+//import { useDispatch, useSelector } from "react-redux";
 import transporteCargaAPI from "../../services/transporteCargaAPI";
 
 const options = [
-  { key: 1, text: "pick up", value: "pick up" },
-  { key: 2, text: "Camion", value: "Camion" },
+  { key: 1, text: "Pick up", value: "Pick up" },
+  { key: 2, text: "Camión", value: "Camión" },
   { key: 3, text: "Van", value: "Van" },
 ];
 
 const Register = () => {
   
-  const dispatch= useDispatch();
-  const datos = useSelector( (state) => state.register.info);
+  //const dispatch= useDispatch();
+  //const datos = useSelector( (state) => state.register.info);
 
   const history = useNavigate();
   const [error, setError] = useState();
@@ -37,7 +37,7 @@ const Register = () => {
   const [cliente, setCliente] = useState({
     id: 0,
     edad: 0,
-    celular: 0,
+    celular: "",
     nombre: "",
     correo: "",
     contraseña: "",
@@ -77,11 +77,11 @@ const Register = () => {
     var anio = fecha.getFullYear();
     if (cliente.nombre === "") {
       setError("Ingrese nombre completo");
-    } else if (cliente.id === "") {
+    } else if (cliente.id === "" || cliente.id === 0) {
       setError("Ingrese su ID");
     } else if (cliente.edad === "" || cliente.edad < 18 || cliente.edad > 66) {
       setError("Ingrese una edad correcta >17 <66");
-    } else if (cliente.celular === "") {
+    } else if (cliente.celular === "" || cliente.celular === 0) {
       setError("Ingrese un numero de contacto");
     } else if (cliente.correo === "" || caract.test(cliente.correo) === false) {
       setError("Ingrese un correo correcto");
@@ -106,7 +106,7 @@ const Register = () => {
       vehiculo.anio < 1980 ||
       vehiculo.anio > anio + 1
     ) {
-      setError("Ingrese modelo correcto de vehiculo");
+      setError("Ingrese año correcto de vehiculo");
     } else if (
       vehiculo.capacidad === "" ||
       vehiculo.capacidad < 1 ||
@@ -138,8 +138,8 @@ const Register = () => {
             }
 
           }
-          const data = transporteCargaAPI.postDriverInfo(request)
-          console.log(data);
+          const data = transporteCargaAPI.postDriverInfo(request);
+          alert("¡Registro exitoso!");
           
           //postCliente(cliente);
           //postVehiculo(vehiculo);

@@ -11,7 +11,8 @@ import { logActions } from './middleware/logActions';
 //import { Button } from 'semantic-ui-react';
 
 //const root = ReactDOM.createRoot(document.getElementById('root'));
-const composedEnhacers = compose(window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),applyMiddleware(thunk,logActions));
+//const composedEnhacers = compose(window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),applyMiddleware(thunk,logActions));
+const composedEnhacers = compose(applyMiddleware(thunk,logActions));
 const store = createStore(allReducers,composedEnhacers);
 ReactDOM.render(
     

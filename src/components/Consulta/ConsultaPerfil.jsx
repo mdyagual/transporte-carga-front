@@ -149,7 +149,7 @@ const ConsultaPerfil = ({ user }) => {
             <Input
               style={{ width: "280px" }}
               name="capacidad"
-              value={"Capacidad : " + info.capacidad}
+              value={"Capacidad (kg): " + info.capacidad}
               disabled
             />
             <br />
