@@ -3,12 +3,9 @@ import { Button, Grid, Segment } from "semantic-ui-react";
 import HeaderDinamic from "../../layouts/Header";
 import RegisterVehicle from "./RegisterVehicle";
 import RegisterCliente from "./RegisterCliente";
-//import postVehiculo from "../../helpers/postVehiculo";
-//import postCliente from "../../helpers/postCliente";
 import { auth } from "../../firebase/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-//import { useDispatch, useSelector } from "react-redux";
 import transporteCargaAPI from "../../services/transporteCargaAPI";
 
 const options = [
@@ -18,9 +15,6 @@ const options = [
 ];
 
 const Register = () => {
-  
-  //const dispatch= useDispatch();
-  //const datos = useSelector( (state) => state.register.info);
 
   const history = useNavigate();
   const [error, setError] = useState();
@@ -102,7 +96,6 @@ const Register = () => {
     } else if (vehiculo.marca === "") {
       setError("Ingrese marca del vehiculo");
     } else if (
-      //vehiculo.modelo === "" ||
       vehiculo.anio < 1980 ||
       vehiculo.anio > anio + 1
     ) {
@@ -116,7 +109,7 @@ const Register = () => {
     } else if (vehiculo.tipo === "") {
       setError("Seleccione tipo de vehiculo");
     } else {
-      //------
+
       const usuario = createUserWithEmailAndPassword(
         auth,
         cliente.correo,
@@ -141,9 +134,7 @@ const Register = () => {
           const data = transporteCargaAPI.postDriverInfo(request);
           alert("¡Registro exitoso!");
           
-          //postCliente(cliente);
-          //postVehiculo(vehiculo);
-          history("/perfil");
+          history("/inicio");
           return usuarioFirebase;
         })
         .catch((err) => {
@@ -161,7 +152,6 @@ const Register = () => {
             default:
           }
         });
-        //--------
     }
   };
   useEffect(() => {

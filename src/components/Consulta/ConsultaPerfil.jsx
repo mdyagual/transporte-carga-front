@@ -10,43 +10,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 
 const ConsultaPerfil = ({ user }) => {
-  
-  /*const [vehiculo, setVehiculo] = useState({
-    id: 0,
-    idCliente: 0,
-    modelo: 0,
-    capacidad: 0,
-    placa: "",
-    marca: "",
-    tipo: "",
-  });
-  const [cliente, setCliente] = useState({
-    id: 0,
-    edad: 0,
-    celular: 0,
-    nombre: "",
-    correo: "",
-  });*/
-
-  /*useEffect(async () => {
-    const urlc = "http://localhost:8080/cliente/email/" + user;
-    const cli = await fetch(urlc)
-      .then((resc) => {
-        return resc.json();
-      })
-      .then((datac) => setCliente(datac))
-      .catch((error) => console.log(error));
-
-    const ve = await fetch("http://localhost:8080/vehiculo/cliente/" + user)
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setVehiculo(data);
-      })
-      .catch((error) => console.log(error));
-  }, []);*/
-
   const dispatch = useDispatch();
   const history = useNavigate();
 
@@ -66,10 +29,6 @@ const ConsultaPerfil = ({ user }) => {
       getDriverInfo(user);
   },[]);
 
-
-
-
-  //------------------------------------------
   return (
     <>
       <Grid stackable container divided="vertically">

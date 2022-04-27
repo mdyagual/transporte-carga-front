@@ -1,14 +1,12 @@
 import * as actConsult from '../utils/actionConsultTypes';
 
 const initialState = {
-    vehiculos:[],
-    selected: {}
+    vehiculos:[]
 };
 
 export const ConsultReducer = (state = initialState, action) => {
     switch(action.type){
         case actConsult.GET_ALL_VEHICLES:  
-            //console.log("Reducer: ",action.payload);
             const newV = [];
             action.payload.map((v) =>  newV.push({
                 key: v.placa,
