@@ -4,6 +4,10 @@ import { auth } from "../../firebase/firebase";
 import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { Button, Header, Icon, Input, Segment } from "semantic-ui-react";
 
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 const Loggin = () => {
   const [user, setUser] = useState({
     email: "",
@@ -61,8 +65,15 @@ const Loggin = () => {
           }
         });
       if (userLogeado) {
-        setLogeado(userLogeado);
-        history("/perfil");
+        
+        sleep(6000).then(() => { 
+
+          history("/perfil");
+          setLogeado(userLogeado);
+        
+        });
+        
+        
       }
     }
   };
