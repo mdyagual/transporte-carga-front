@@ -14,11 +14,19 @@ const options = [
   { key: 3, text: "Van", value: "Van" },
 ];
 
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 const Register = () => {
 
   const history = useNavigate();
   const [error, setError] = useState();
+  
   const [errorp, setErrorp] = useState();
+  const [success,setSucess] = useState();
+  const [statusHidden,setStatusHidden] = useState();
+  const [disabled,setDisabled] = useState();
   const [vehiculo, setVehiculo] = useState({
     email: "",
     anio: 0,
@@ -132,9 +140,11 @@ const Register = () => {
 
           }
           const data = transporteCargaAPI.postDriverInfo(request);
-          alert("¡Registro exitoso!");
-          
-          history("/");
+          setSucess("¡Ingreso exitoso! Regresando a la página principal...");
+          setStatusHidden(false);
+          setDisabled(true);
+          sleep(5000).then(() =>  history("/"));
+         
           return usuarioFirebase;
         })
         .catch((err) => {
@@ -156,12 +166,17 @@ const Register = () => {
   };
   useEffect(() => {
     setError("");
+    setSucess("");
+    setStatusHidden(true);
+    setDisabled(false);
   }, []);
   const hidenError = () => {
     setError("");
     setErrorp("");
   };
-  const styles = { color: "red" };
+  
+  const stylesErr = { color: "red" };
+  const stylesOk = { color: "green" };
 
   return (
     <>
@@ -173,7 +188,7 @@ const Register = () => {
         <Grid.Row centered columns={4}>
           <RegisterCliente
             handleChange={handleChange}
-            styles={styles}
+            styles={stylesErr}
             error={error}
             hidenError={hidenError}
           />
@@ -184,15 +199,22 @@ const Register = () => {
             hidenError={hidenError}
           />
 
-          <span className="error" style={styles}>
+          <span className="error" style={stylesErr}>
             {errorp}
           </span>
         </Grid.Row>
 
         <Grid.Row centered>
-          <Button primary id="Text" onClick={onRegister}>
+          <Segment basic>
+          <span className="success" style={stylesOk} hidden={statusHidden}>
+            {success}
+          </span>
+          </Segment>
+          <Button primary id="Text" onClick={onRegister} disabled={disabled}>
             Registrarse
           </Button>
+          
+          
         </Grid.Row>
       </Grid>
     </>
