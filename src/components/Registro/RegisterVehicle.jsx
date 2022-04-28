@@ -23,8 +23,8 @@ const RegisterVehicle = ({
           onChange={handleChangeV}
           onClick={hidenError}
           onKeyPress={(event) => {
-            if (!/[A-Z]/.test(event.key)) {
-              window.alert("Solo letras mayusculas");
+            if (!/[A-Za-z]/.test(event.key)) {
+              //window.alert("Solo letras mayusculas");
               event.preventDefault();
             }
           }}

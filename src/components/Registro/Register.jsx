@@ -89,8 +89,8 @@ const Register = () => {
       );
     } else if (cliente.contraseña !== cliente.confirmcontraseña) {
       setError("Confirmar contraseña correcta");
-    } else if (vehiculo.placal === "" || vehiculo.placal.length < 3) {
-      setError("Ingrese Letras de placa correctas");
+    } else if (vehiculo.placal === "" || vehiculo.placal.length < 3 || vehiculo.placal.match(/[a-z]/)) {
+      setError("Ingrese Letras de placa correctamente: Mínimo 3 y en mayúsculas");
     } else if (vehiculo.placan === "" || vehiculo.placan.length < 3) {
       setError("Ingrese numero de placa correcto");
     } else if (vehiculo.marca === "") {
