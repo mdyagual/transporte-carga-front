@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../firebase/firebase";
 import { signInWithEmailAndPassword, signOut } from "firebase/auth";
@@ -16,9 +16,12 @@ const Loggin = () => {
 
   const history = useNavigate();
   const [logeado, setLogeado] = useState();
-
+  const [success,setSucess] = useState();
+  const [disabled,setDisabled] = useState();
+  const [statusHidden,setStatusHidden] = useState();
   const [errorc, setError] = useState();
   const [errorp, setErrorp] = useState();
+  const stylesOk = { color: "green" };
 
   const handleChange = ({ target: { name, value } }) => {
     setUser({
@@ -65,8 +68,10 @@ const Loggin = () => {
           }
         });
       if (userLogeado) {
-        
-        sleep(6000).then(() => { 
+        setSucess("Iniciando sesión...");
+        setStatusHidden(false);
+        setDisabled(true);
+        sleep(5000).then(() => { 
 
           history("/perfil");
           setLogeado(userLogeado);
@@ -77,6 +82,11 @@ const Loggin = () => {
       }
     }
   };
+  useEffect(() => {
+    setSucess("");
+    setStatusHidden(true);
+    setDisabled(false);
+  }, []);
   const hidenError = () => {
     setError("");
     setErrorp("");
@@ -116,16 +126,25 @@ const Loggin = () => {
           {errorp}
         </span>
       </Segment>
+      <br/>
+        <span className="success" style={stylesOk} hidden={statusHidden}>
+            {success}
+          </span>
       <Segment basic>
+          
         {logeado ? (
-          <Button primary id="Text" onClick={() => signOut(auth)}>
+          <Button primary id="Text"  onClick={() => signOut(auth)}>
             Cerrar sesión
           </Button>
         ) : (
+          
           <Button primary id="Text" onClick={handleSubmit}>
             Iniciar sesión
           </Button>
+          
         )}
+        
+         
       </Segment>
       <Segment basic>
         <Header as="h5">

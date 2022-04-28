@@ -17,7 +17,7 @@ export const ConsultReducer = (state = initialState, action) => {
             console.log(newV);
             return {...state, vehiculos:newV};
         default:
-            return {...state};
+            return state;
 
     }
 };

@@ -7,14 +7,13 @@ const initialState = {
 
 export const RegisterReducer = (state = initialState, action) => {
     switch(action.type){
-        case actConsult.POST_DRIVER_INFO:  
-            
+        case actConsult.POST_DRIVER_INFO:              
             return {...state, info: action.payload};
 		case actConsult.GET_DRIVER_INFO:
             const resConductor = action.payload.conductor;
-			return {...state, vehiculo: action.payload, conductor: resConductor};
+			return {vehiculo: action.payload, conductor: resConductor};
         default:
-            return {...state};
+            return state;
 
     }
 };

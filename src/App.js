@@ -28,7 +28,7 @@ const App = () => {
         <Route path="/" element={<div className='Inicio'><InicioPage/></div>}/>
         <Route path="/registro" element={<div className='Registro'><RegistroPage/></div>}/>
         <Route path="/consulta" element={<div className='Consulta'><ConsultaPage/></div>}/>
-        <Route path="/perfil" element={<div className='Inicio'><ConsultaPerfil user={user}/></div>}/>
+        {user !== null && <Route path="/perfil" element={<div className='Registro'><ConsultaPerfil user={user}/></div>}/>}
       </Routes>
     </Router>
     

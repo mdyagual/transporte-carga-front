@@ -1,5 +1,5 @@
-import React, { useEffect} from "react";
-import { Button, Grid, Header, Icon, Input, Segment } from "semantic-ui-react";
+import React, { useEffect, useState} from "react";
+import { Button, Grid, Header, Icon, IconGroup, Input, Segment } from "semantic-ui-react";
 import { auth } from "../../firebase/firebase";
 import { signOut } from "firebase/auth";
 import HeaderDinamic from "../../layouts/Header";
@@ -8,27 +8,32 @@ import { getDriverInfoAction } from '../../actions/actionsRegister';
 import transporteCargaAPI from '../../services/transporteCargaAPI';
 import { useDispatch, useSelector } from "react-redux";
 
-
 const ConsultaPerfil = ({ user }) => {
   const dispatch = useDispatch();
   const history = useNavigate();
 
-  const info = useSelector( (state) => state.register.vehiculo);
-  const cond = useSelector( (state) => state.register.conductor);
+  const info = useSelector( (state) => state.register.vehiculo ) || [];
+  const cond = useSelector( (state) => state.register.conductor) || [];
+ 
+  
 
-  const getDriverInfo = async (correo) => {
-      try {
-          const data = await transporteCargaAPI.getDriverInfo(correo);            
-          dispatch(getDriverInfoAction(data));          
+  const getDriverInfo = async (correo) => {    
+        try {          
+          const data = await transporteCargaAPI.getDriverInfo(correo);    
+          dispatch(getDriverInfoAction(data));         
+               
       }catch (error){
           console.log(error);
-      }
+      }  
+    
   };
+  useEffect(() => {    
+    getDriverInfo(user);
 
-  useEffect(() => {   
-      getDriverInfo(user);
-  },[]);
+},[]); 
 
+
+  
   return (
     <>
       <Grid stackable container divided="vertically">
