@@ -23,7 +23,7 @@ const RegisterVehicle = ({
           onChange={handleChangeV}
           onClick={hidenError}
           onKeyPress={(event) => {
-            if (!/[A-Za-z]/.test(event.key)) {
+            if (!/[A-Z]/.test(event.key)) {
               //window.alert("Solo letras mayusculas");
               event.preventDefault();
             }
@@ -51,8 +51,16 @@ const RegisterVehicle = ({
           type="text"
           name="marca"
           id="marca"
+          minLength="3"
+          maxLength="25"
           onChange={handleChangeV}
           onClick={hidenError}
+          onKeyPress={(event) => {
+            if (!/[A-Za-z]/.test(event.key)) {
+              //window.alert("Solo letras mayusculas");
+              event.preventDefault();
+            }
+          }}
         />
         <br />
         <Input

@@ -16,18 +16,15 @@ const RegisterCliente = ({ handleChange, styles, error, hidenError }) => {
           id="nombre"
           onChange={handleChange}
           onClick={hidenError}
+         
         />
         <br />
         <Input
           placeholder="ID"
-          type="number"
+          type="text"
           name="id"
           id="id"
-          onKeyPress={(event) => {
-            if (!/[0-9]/.test(event.key)) {
-              event.preventDefault();
-            }
-          }}
+          maxLength="10"
           onChange={handleChange}
           onClick={hidenError}
         />
@@ -52,14 +49,9 @@ const RegisterCliente = ({ handleChange, styles, error, hidenError }) => {
           placeholder="Celular"
           type="text"
           name="celular"
-          id="celular"
-          onChange={handleChange}
+          id="celular"          
           maxLength="10"
-          onKeyPress={(event) => {
-            if (!/[0-9]/.test(event.key)) {
-              event.preventDefault();
-            }
-          }}
+          onChange={handleChange}
           onClick={hidenError}
         />
         <br />

@@ -77,14 +77,16 @@ const Register = () => {
     var pass = /^(?=.*\d)(?=.*[a-záéíóúüñ]).*[A-ZÁÉÍÓÚÜÑ]/;
     var fecha = new Date();
     var anio = fecha.getFullYear();
-    if (cliente.nombre === "") {
-      setError("Ingrese nombre completo");
-    } else if (cliente.id === "" || cliente.id === 0) {
-      setError("Ingrese su ID");
+    console.log(cliente.id < 2147483647);
+    if (cliente.nombre === "" || !/[A-z]{3,}[ ][A-z]{3,}/.test(cliente.nombre)) {
+      setError("Ingrese 1 nombre y por lo menos 1 apellido");
+      
+    } else if (cliente.id === "" || !/[0-9]{10}/.test(cliente.id) || cliente.id > 2147483647) {
+      setError("Ingrese un ID válido");
     } else if (cliente.edad === "" || cliente.edad < 18 || cliente.edad > 66) {
-      setError("Ingrese una edad correcta >17 <66");
-    } else if (cliente.celular === "" || cliente.celular === 0) {
-      setError("Ingrese un numero de contacto");
+      setError("Ingrese una edad correcta > 17 < 66");
+    } else if (cliente.celular === "" || !/[0-9]{10}/.test(cliente.celular)) {
+      setError("Ingrese un numero de contacto válido");
     } else if (cliente.correo === "" || caract.test(cliente.correo) === false) {
       setError("Ingrese un correo correcto");
     } else if (
